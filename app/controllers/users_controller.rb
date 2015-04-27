@@ -21,5 +21,6 @@ class UsersController < ApplicationController
    end 
   def user_params
   	params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    #require :user - important, allows it to be created
   end
 end
