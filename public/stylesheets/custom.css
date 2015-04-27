@@ -3,11 +3,12 @@
 }
 
 body {
-	background: #cff;
+	background: #cff;	
 }
 
 header {
-	padding-top: 20px;	
+	padding-top: 20px;
+	word-spacing:-2px;	
 }
 
 header img {
@@ -120,7 +121,8 @@ td.main {
 td.sidebar {
 	width=30%;
 	padding=1em;
-	vertical-align: top;
+	padding-left:1em;
+	vertical-align: center;
 	background: #ffc;
 }
 
