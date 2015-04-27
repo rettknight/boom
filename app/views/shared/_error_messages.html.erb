@@ -5,8 +5,8 @@
 			prohibited this user from being saved: 
 		</h2>
 		<p>There were problems with the following fields:</p> <br />
-		<ul><%@user.errors.full_messages.each do |message|%> 
-	<li><%=message %></li> 
+		<%@user.errors.full_messages.each do |message|%> 
+		<ul><li><%=message %></li> 
 		</ul>
 		<% end %> 
 	</div>

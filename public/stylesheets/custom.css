@@ -74,7 +74,6 @@ nav ul li a:hover{
 }
 
 /* Sample Button
-
 a.signup_button {
 	margin-left: auto;
 	margin-right: auto;
@@ -132,4 +131,42 @@ td.sidebar {
 
 div.field, div.actions {
  margin-bottom: 10px;
+}
+/* Fields with Errors*/
+
+.field_with_errors {
+	margin-top: 10px;
+	padding: 2px;
+	background-color: red;
+	display:table;
+}
+
+.field_with_errors label{
+	color=#fff;
+}
+#error_explanation {
+	width: 400px;
+	border:2px solid red;
+	font-size:12px;
+	padding: 7px;
+	padding-bottom: 12px;
+	margin-bottom:20px;
+	background-color: #f0f0f0;
+}
+#error_explanation h2 {
+	text-align:left;
+	font-weight:bold;
+	font-size: 12px;
+	margin: -7px;
+	background-color: #c00;
+	color: #fff;
+}
+#error_explanation p {
+	color #333;
+	margin-bottom:0;
+}
+#error_explanation ul li {
+	font-size: 12px;
+	padding:0px;
+	list-style: square;
 }
