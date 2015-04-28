@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
-  before_filter :authenticate, only: [:edit, :update, :index]
+  before_filter :authenticate, only: [:edit, :update, :index, :destroy]
   before_filter :correct_user, only: [:edit, :update]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  
+  before_filter :admin_user, only: [:destroy]
   def index
     @users = User.paginate(:page => params[:page])
     @title = " - All Users "
@@ -42,7 +42,12 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    
+    if @user.admin? 
+      redirect_to root_path, :flash => {:error => "Admins can't delete themselves. "} 
+    else
+      @user.destroy
+      redirect_to users_path, :flash => {:success => "User deleted."}  
+    end
   end
 
   def user_params
@@ -62,5 +67,9 @@ class UsersController < ApplicationController
 
     def set_user
       @user = User.find(params[:id])    
+    end
+
+    def admin_user
+      redirect_to(root_path) unless current_user.admin? 
     end
 end
