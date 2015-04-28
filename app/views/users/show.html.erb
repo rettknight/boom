@@ -6,17 +6,18 @@
 		<%= @user.name %>
 		</h1>
    	</td>
+   	<td class="sidebar round">
+   		<strong>Name </strong> <%=@user.name %> <br />
+   		<strong>URL</strong> <%=link_to user_path(@user), 
+   								user_path(@user) %>
+      <strong>Envios </strong> <%= @user.envios.count %>
+
+   	</td>
+  </tr>
     <% if @user.envios.any? %> 
         <table class ="envios" summary="User envios">
           <%= render @envios %> 
         </table>
         <%= will_paginate @envios %>
     <% end %> 
-   	<td class="sidebar round">
-   		<strong>Name </strong> <%=@user.name %> <br />
-   		<strong>URL</strong> <%=link_to user_path(@user), 
-   								user_path(@user) %>
-      <strong>Envios </strong> <%= @user.envios.count %>
-   	</td>
-  </tr>
 </table>	

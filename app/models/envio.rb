@@ -15,5 +15,5 @@ class Envio < ActiveRecord::Base
 	validates :content, :presence => true
 	validates :user_id, :presence => true
 	
-	default_scope :order => 'envios.created_at DESC'
+	default_scope {order('envios.created_at DESC')}
 end
