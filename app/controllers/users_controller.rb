@@ -1,18 +1,20 @@
 class UsersController < ApplicationController
-  before_filter :authenticate, only: [:edit, :update]
+  before_filter :authenticate, only: [:edit, :update, :index]
   before_filter :correct_user, only: [:edit, :update]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  def set_user
-    @user = User.find(params[:id])    
+  
+  def index
+    @users = User.all
+    @title = " - All Users "
   end
 
   def show
-	@title = "- "+@user.name
+	  @title = "- "+@user.name
   end
 
   def new
-   @user = User.new
-   @title = "- Sign up"
+    @user = User.new
+    @title = "- Sign up"
   end
 
   def create
@@ -27,7 +29,7 @@ class UsersController < ApplicationController
    end 
 
   def edit
-       @title = "- Edit user" 
+    @title = "- Edit user" 
   end
 
   def update
@@ -56,5 +58,9 @@ class UsersController < ApplicationController
     def correct_user
       @user = User.find(params[:id])
       redirect_to(root_path) unless current_user?(@user)
+    end
+
+    def set_user
+      @user = User.find(params[:id])    
     end
 end
