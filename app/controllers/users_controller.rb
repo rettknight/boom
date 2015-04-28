@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   before_filter :correct_user, only: [:edit, :update]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_filter :admin_user, only: [:destroy]
+  
   def index
     @users = User.paginate(:page => params[:page])
     @title = " - All Users "
