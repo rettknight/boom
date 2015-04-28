@@ -15,6 +15,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'coffee-script-source', '1.8.0'
 gem 'gravatar_image_tag'
+gem 'will_paginate'
 
 gem 'sdoc', '~> 0.4.0', group: :doc
 group :development, :test do
