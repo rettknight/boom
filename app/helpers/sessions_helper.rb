@@ -20,9 +20,15 @@ module SessionsHelper
 		!current_user.nil? #returns true if the user is not (!) nil
 	end
 
+	def sign_out
+		cookies.delete(:remember_token)
+		current_user = nil 
+	end
+
 	private
 		def user_from_remember_token
 			User.authenticate_with_salt(*remember_token)
+			# It works because salt is madre from id + the password & that's what it validates
 			# the * means user.id, user.salt, it's basically what is inside the hash
 		end
 
