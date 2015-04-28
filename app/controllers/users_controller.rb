@@ -1,7 +1,11 @@
 class UsersController < ApplicationController
 
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  def set_user
+    @user = User.find(params[:id])    
+  end
+
   def show
-	@user = User.find(params[:id])  	
 	@title = "- "+@user.name
   end
 
@@ -20,6 +24,24 @@ class UsersController < ApplicationController
 			render 'new'
 		end
    end 
+
+  def edit
+       @title = "- Edit user" 
+  end
+
+  def update
+    if @user.update_attributes(user_params)
+      redirect_to @user, :flash =>{:success => "User information changed."}
+    else
+      render 'edit'
+      @title = "- Edit user"
+    end
+  end
+
+  def destroy
+    
+  end
+
   def user_params
   	params.require(:user).permit(:name, :email, :password, :password_confirmation)
     #require :user - important, allows it to be created
