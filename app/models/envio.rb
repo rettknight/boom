@@ -12,5 +12,8 @@
 class Envio < ActiveRecord::Base
 	belongs_to :user #association to user model
 
-	default_scope :order => 'microposts.created_at DESC'
+	validates :content, :presence => true
+	validates :user_id, :presence => true
+	
+	default_scope :order => 'envios.created_at DESC'
 end

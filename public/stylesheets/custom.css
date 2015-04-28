@@ -179,3 +179,47 @@ ul.users li {
 	list-style:none;
 	
 }
+/* Envios */
+h1.envio {
+	margin-bottom:0.3em;
+}
+table.envios {
+	margin-top: 1em;
+}
+table.envios tr{
+	heigh:70px;
+}
+table.envios tr td.gravatar {
+	border-top:1px solid #ccc;
+	vertical-align: top;
+	width: 50px;
+}
+table.envios tr td.envio {
+	border-top: 1px solid #ccc;
+	vertical-align: top;
+	padding-top: 10px;
+}
+table.envios tr td.envio span.timestamp {
+	display: block;
+	font-size: 85%;
+	color: #666;
+}
+div.user_info img{
+	padding-right: 0.1em; 
+}
+div.user_info a{
+	text-decoration: none;
+}
+div.user_info span.user_name {
+	position: absolute;
+}
+div.user_info span.envios{
+	font-size: 80%;
+}
+form.new_envio{
+	margin-bottom:2em;
+}
+form.new_envio textarea{
+	heigh: 4em;
+	margin-bottom: 0;
+}
