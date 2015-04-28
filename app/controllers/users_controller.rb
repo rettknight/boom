@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-
+  before_filter :authenticate, only: [:edit, :update]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   def set_user
     @user = User.find(params[:id])    
@@ -46,4 +46,9 @@ class UsersController < ApplicationController
   	params.require(:user).permit(:name, :email, :password, :password_confirmation)
     #require :user - important, allows it to be created
   end
+
+  private
+    def authenticate
+      deny_access unless signed_in? 
+    end
 end
