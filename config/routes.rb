@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root 'pages#home'
   resources :users
   resources :sessions, :only => [:new, :create, :destroy]
+  resources :envios, :only => [:create, :destroy]
 
   get 'pages/home' 
   get '/signup', :to => 'users#new'
