@@ -53,8 +53,9 @@ class User < ActiveRecord::Base
 	end
 
 	def feed
-		Envio.where("user_id = ?", id)
+		Envio.from_users_followed_by(self)
 	end
+	#Envio.where("user_id = ? ", id)
 	#Always use ? to avoid sql injection, good habit, 
 	#it means where and it's filled by the next param (id)
 	#def feed == keeping for future reference
