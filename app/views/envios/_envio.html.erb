@@ -5,4 +5,12 @@
  		Posted <%= time_ago_in_words(envio.created_at) %> ago.
  	</span>  
  </td>
+ <!-- DRY, Fix later. -->
+ 	<% user = envio.user rescue User.find(envio.user_id) %> 
+ 	<% if current_user?(user) || current_user.admin? %> 
+		<td><%= link_to "delete", envio, 	 :method=> :delete,  
+											 :confirm => "You sure?",
+											 :title => envio.content %>
+		</td>
+	<% end %> 
 </tr>

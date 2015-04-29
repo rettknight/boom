@@ -38,6 +38,17 @@ class User < ActiveRecord::Base
 	def has_password?(submitted_password)
 	  encrypted_password == encrypt(submitted_password)	
 	end
+
+	def feed
+		Envio.where("user_id = ?", id)
+	end
+	#Always use ? to avoid sql injection, good habit, it means where and it's filled by the next param (id)
+	
+
+	#def feed == keeping for future reference
+	 # envios #returns all 'envios' made by the current user 	
+	#end
+
 	class << self
 		def authenticate(email, submitted_password)
 			user = find_by_email(email)  #no need to use User.find, just find -class method
