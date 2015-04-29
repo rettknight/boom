@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
 									 :foreign_key => "followed_id",
 									 :class_name => "Relationship" 
 	has_many :following, :through => :relationships, 
-						 :source => :followed 
+						 :source => :followed
 	has_many :followers, :through => :reverse_relationships,
 						 :source => :follower 
 	#for method following
@@ -69,8 +69,6 @@ class User < ActiveRecord::Base
 	def follow!(followed)
 		relationships.create!(:followed_id => followed.id)
 	end 
-
-
 
 	#end example methods
 	class << self
