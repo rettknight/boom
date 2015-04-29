@@ -1,22 +1,12 @@
-<table class="profile" summary="Profile Information">
-  <tr>
-   	<td class = "main">  	
-		<h1>
-		<%= @user.name %>
-		</h1>
-   <!--  <%= render 'follow_form' if signed_in? %>  -->
-   	</td>
-   	<td class="sidebar round">
-   		<strong>Name </strong> <%=@user.name %> <br />
-   		<strong>URL</strong> <%=link_to user_path(@user), 
-   								user_path(@user) %>
-      <strong>Envios </strong> <%= %>
-      <%= render 'shared/stats' %>
-   	</td>
-  </tr>
-        <table class ="envios" summary="User envios">
-          
-        </table> 
-</table>	
-
 <table class ="profile" summary= "Profile Information"> 
+  <tr>
+    <td class = "main">
+      <h1><%= @user.name %> </h1>
+    </td> 
+
+    <td class ="sidebar round">
+      <strong>Name</strong> <%=@user.name %> <%=@user.lastname %> <br /> 
+      <strong>URL </strong> <%= link_to user_path(@user), user_path(@user) %>
+    </td>
+  </tr>
+</table>

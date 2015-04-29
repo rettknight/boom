@@ -3,7 +3,6 @@ class PagesController < ApplicationController
   	@title = " - Home"
   	if signed_in?
   		@envio = Envio.new
-  		@feed_items = current_user.feed.paginate(:page => params[:page])
   	end
   end
 end

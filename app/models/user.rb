@@ -24,19 +24,19 @@ class User < ActiveRecord::Base
 	# attr_accessible doesn't work in Rails 4.2, in controller define 
 	# class_params.require(class).permit(param1,param2, etc) 
 	has_many :envios, :dependent => :destroy #association to the envio model for it to work 
-	#dependent -> destroy means if user is deleted envio is too. 
+		#dependent -> destroy means if user is deleted envio is too. 
 	#what happens if user is deleted and envio is needed? 
 	#examples
-	has_many :relationships, :dependent => :destroy,
-							 :foreign_key => "follower_id"
+	#has_many :relationships, :dependent => :destroy,
+							 #:foreign_key => "follower_id"
 	#what can I use this for?, example for the future
-	has_many :reverse_relationships, :dependent => :destroy,
-									 :foreign_key => "followed_id",
-									 :class_name => "Relationship" 
-	has_many :following, :through => :relationships, 
-						 :source => :followed
-	has_many :followers, :through => :reverse_relationships,
-						 :source => :follower 
+	#has_many :reverse_relationships, :dependent => :destroy,
+									 #:foreign_key => "followed_id",
+									 #:class_name => "Relationship" 
+	#has_many :following, :through => :relationships, 
+	#					 :source => :followed
+	#has_many :followers, :through => :reverse_relationships,
+	#					 :source => :follower 
 	#for method following
 	#examples end 
 	email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
