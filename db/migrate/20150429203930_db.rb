@@ -1,19 +1,6 @@
-# encoding: UTF-8
-# This file is auto-generated from the current state of the database. Instead
-# of editing this file, please use the migrations feature of Active Record to
-# incrementally modify your database, and then regenerate this schema definition.
-#
-# Note that this schema.rb definition is the authoritative source for your
-# database schema. If you need to create the application database on another
-# system, you should be using db:schema:load, not running all the migrations
-# from scratch. The latter is a flawed and unsustainable approach (the more migrations
-# you'll amass, the slower it'll run and the greater likelihood for issues).
-#
-# It's strongly recommended that you check this file into your version control system.
-
-ActiveRecord::Schema.define(version: 20150324210333) do
-
-  create_table "details", primary_key: "idDetail", force: :cascade do |t|
+class Db < ActiveRecord::Migration
+  def change
+  	create_table "details", primary_key: "idDetail", force: :cascade do |t|
     t.string  "key",       limit: 100
     t.string  "article",   limit: 100, null: false
     t.string  "amount",    limit: 100, null: false
@@ -57,7 +44,7 @@ ActiveRecord::Schema.define(version: 20150324210333) do
     t.string   "name",           limit: 100, null: false
     t.string   "lastname",       limit: 100
     t.string   "email",          limit: 100, null: false
-    t.string   "password",       limit: 100, null: false
+    t.string   "encrypted_password",       limit: 255, null: false
     t.string   "salt",           limit: 200
     t.datetime "updatedAt",                  null: false
     t.datetime "createdAt",                  null: false
@@ -66,20 +53,14 @@ ActiveRecord::Schema.define(version: 20150324210333) do
     t.string   "rfc",            limit: 255
     t.string   "curp",           limit: 255
     t.string   "avatar",         limit: 255
-    t.integer  "idUserType",     limit: 4,   null: false
+    t.boolean  "admin", 	 limit: 1, default: false 
   end
 
-  add_index "users", ["idUserType"], name: "fk_User_UserType_idx", using: :btree
-
-  create_table "usertypes", primary_key: "idUserType", force: :cascade do |t|
-    t.string   "name",      limit: 45, null: false
-    t.datetime "createdAt",            null: false
-    t.datetime "updatedAt",            null: false
-  end
 
   add_foreign_key "details", "products", column: "idProduct", primary_key: "idProduct", name: "fk_Detail_Product1"
   add_foreign_key "envios", "details", column: "idDetail", primary_key: "idDetail", name: "fk_Envio_Details1"
   add_foreign_key "envios", "transports", column: "idTransport", primary_key: "idTransport", name: "fk_Envio_Transport1"
   add_foreign_key "envios", "users", column: "idUser", primary_key: "idUser", name: "fk_Envio_User1"
-  add_foreign_key "users", "usertypes", column: "idUserType", primary_key: "idUserType", name: "fk_User_UserType"
+	
+  end
 end
