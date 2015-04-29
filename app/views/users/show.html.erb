@@ -2,23 +2,21 @@
   <tr>
    	<td class = "main">  	
 		<h1>
-		<%= gravatar_for @user %>
 		<%= @user.name %>
 		</h1>
-    <%= render 'follow_form' if signed_in? %> 
+   <!--  <%= render 'follow_form' if signed_in? %>  -->
    	</td>
    	<td class="sidebar round">
    		<strong>Name </strong> <%=@user.name %> <br />
    		<strong>URL</strong> <%=link_to user_path(@user), 
    								user_path(@user) %>
-      <strong>Envios </strong> <%= @user.envios.count %>
+      <strong>Envios </strong> <%= %>
       <%= render 'shared/stats' %>
    	</td>
   </tr>
-    <% if @user.envios.any? %> 
         <table class ="envios" summary="User envios">
-          <%= render @envios %> 
-        </table>
-        <%= will_paginate @envios %>
-    <% end %> 
+          
+        </table> 
 </table>	
+
+<table class ="profile" summary= "Profile Information"> 

@@ -61,6 +61,5 @@ class Db < ActiveRecord::Migration
   add_foreign_key "envios", "details", column: "idDetail", primary_key: "idDetail", name: "fk_Envio_Details1"
   add_foreign_key "envios", "transports", column: "idTransport", primary_key: "idTransport", name: "fk_Envio_Transport1"
   add_foreign_key "envios", "users", column: "idUser", primary_key: "idUser", name: "fk_Envio_User1"
-	
   end
 end

@@ -2,13 +2,19 @@
 #
 # Table name: users
 #
-#  id                 :integer          not null, primary key
-#  name               :string(255)
-#  email              :string(255)
-#  created_at         :datetime         not null
-#  updated_at         :datetime         not null
-#  encrypted_password :string(255)
-#  salt               :string(255)
+#  idUser             :integer          not null, primary key
+#  name               :string(100)      not null
+#  lastname           :string(100)
+#  email              :string(100)      not null
+#  encrypted_password :string(255)      not null
+#  salt               :string(200)
+#  updatedAt          :datetime         not null
+#  createdAt          :datetime         not null
+#  deletedAt          :datetime
+#  lastConnection     :datetime         not null
+#  rfc                :string(255)
+#  curp               :string(255)
+#  avatar             :string(255)
 #  admin              :boolean          default(FALSE)
 #
 
@@ -55,7 +61,7 @@ class User < ActiveRecord::Base
 	def feed
 		Envio.from_users_followed_by(self)
 	end
-	#Envio.where("user_id = ? ", id)
+	#Envio.where("idUser = ? ", id)
 	#Always use ? to avoid sql injection, good habit, 
 	#it means where and it's filled by the next param (id)
 	#def feed == keeping for future reference
@@ -81,7 +87,7 @@ class User < ActiveRecord::Base
 			# return user if user.has_password?(submitted_password)
 		end
 		def authenticate_with_salt(id, cookie_salt)
-			user = find_by_id(id)
+			user = find_by_idUser(id)
 			(user && user.salt == cookie_salt) ? user : nil 
 			# ? will return user if user exists & user's salt = cookie salt, else (:) it returns nil	
 		end

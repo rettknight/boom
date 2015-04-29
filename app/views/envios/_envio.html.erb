@@ -1,16 +1,13 @@
 <tr>
  <td class = "envio">
- 	<span class="content"><%= envio.content %> </span>
- 	<span class="timestamp">
- 		Posted <%= time_ago_in_words(envio.created_at) %> ago.
- 	</span>  
+
+ </span>  
  </td>
- <!-- DRY, Fix later. -->
- 	<% user = envio.user rescue User.find(envio.user_id) %> 
+ <!-- DRY, Fix later.-->
+ 	<% user = envio.user rescue User.find(envio.idUser) %> 
  	<% if current_user?(user) || current_user.admin? %> 
 		<td><%= link_to "delete", envio, 	 :method=> :delete,  
-											 :confirm => "You sure?",
-											 :title => envio.content %>
+											 :confirm => "You sure?"%>
 		</td>
 	<% end %> 
 </tr>

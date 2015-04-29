@@ -2,13 +2,19 @@
 #
 # Table name: users
 #
-#  id                 :integer          not null, primary key
-#  name               :string(255)
-#  email              :string(255)
-#  created_at         :datetime         not null
-#  updated_at         :datetime         not null
-#  encrypted_password :string(255)
-#  salt               :string(255)
+#  idUser             :integer          not null, primary key
+#  name               :string(100)      not null
+#  lastname           :string(100)
+#  email              :string(100)      not null
+#  encrypted_password :string(255)      not null
+#  salt               :string(200)
+#  updatedAt          :datetime         not null
+#  createdAt          :datetime         not null
+#  deletedAt          :datetime
+#  lastConnection     :datetime         not null
+#  rfc                :string(255)
+#  curp               :string(255)
+#  avatar             :string(255)
 #  admin              :boolean          default(FALSE)
 #
 

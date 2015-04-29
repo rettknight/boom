@@ -66,7 +66,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-  	params.require(:user).permit(:name, :email, :password, :password_confirmation)
+  	params.require(:user).permit(:name, :email, :password, :password_confirmation, :lastname)
     #require :user - important, allows it to be created
   end
 
@@ -82,7 +82,7 @@ class UsersController < ApplicationController
 
     def set_user
       @user = User.find(params[:id])  
-      @envios= @user.envios.paginate(:page => params[:page])
+     # @envios= @user.envios.paginate(:page => params[:page])
     end
 
     def admin_user
