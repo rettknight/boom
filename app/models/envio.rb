@@ -14,22 +14,8 @@
 #  idTransport :integer          not null
 #  idDetail    :integer          not null
 #
-
 class Envio < ActiveRecord::Base
-	belongs_to :user #association to user model
-
-	validates :content, :presence => true
+	belongs_to :user 
 	validates :idUser, :presence => true
-	
 	default_scope {order('envios.created_at DESC')}
-	scope :from_users_followed_by, lambda {|user| followed_by(user)}
-	#scope generates a method called from_users_followed_by
-	#that is called in the user.rb model by the feed method. 
-	private
-		def self.followed_by(user)
-		followed_ids = %(SELECT followed_id FROM relationships 
-					     WHERE follower_id = :idUser) #SQL 
-		where("idUser IN (#{followed_ids}) OR idUser = :idUser", :idUser=> user)
-			#to convert into SQL for parameter
-		end
 end
