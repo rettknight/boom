@@ -12,7 +12,7 @@ class EnviosController < ApplicationController
 	 end
 	end
 	def destroy
-	 @envio.destroy 
+	 @envio.destroy
 	 redirect_to root_path, :flash => {:success => "Envio deleted. "}
 	end
 	private
@@ -24,6 +24,6 @@ class EnviosController < ApplicationController
 		end
 		def authorized_user
 			@envio = Envio.find(params[:id])
-			redirect_to root_path unless current_user?(@micropost.user)
+			redirect_to root_path unless current_user?(@envio.user)
 		end
 end

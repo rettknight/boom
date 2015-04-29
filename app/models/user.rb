@@ -15,11 +15,24 @@
 class User < ActiveRecord::Base
 	attr_accessor :password
 	# attr_accessible :name, :email, :password, :password_confirmation 
-	# attr_accessible required? 
+	# attr_accessible doesn't work in Rails 4.2, in controller define 
+	# class_params.require(class).permit(param1,param2, etc) 
 	has_many :envios, :dependent => :destroy #association to the envio model for it to work 
 	#dependent -> destroy means if user is deleted envio is too. 
 	#what happens if user is deleted and envio is needed? 
-	
+	#examples
+	has_many :relationships, :dependent => :destroy,
+							 :foreign_key => "follower_id"
+	#what can I use this for?, example for the future
+	has_many :reverse_relationships, :dependent => :destroy,
+									 :foreign_key => "followed_id",
+									 :class_name => "Relationship" 
+	has_many :following, :through => :relationships, 
+						 :source => :followed 
+	has_many :followers, :through => :reverse_relationships,
+						 :source => :follower 
+	#for method following
+	#examples end 
 	email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 	# .permit(:name, :email)
 	validates :name, :presence => true, 
@@ -42,13 +55,24 @@ class User < ActiveRecord::Base
 	def feed
 		Envio.where("user_id = ?", id)
 	end
-	#Always use ? to avoid sql injection, good habit, it means where and it's filled by the next param (id)
-	
-
+	#Always use ? to avoid sql injection, good habit, 
+	#it means where and it's filled by the next param (id)
 	#def feed == keeping for future reference
 	 # envios #returns all 'envios' made by the current user 	
 	#end
+	#example methods from chapter 12 - 
+	#can be used as skeleton for future "relationships" between tables
+	def following?(followed)
+		relationships.find_by_followed_id(followed)
+	end
 
+	def follow!(followed)
+		relationships.create!(:followed_id => followed.id)
+	end 
+
+
+
+	#end example methods
 	class << self
 		def authenticate(email, submitted_password)
 			user = find_by_email(email)  #no need to use User.find, just find -class method

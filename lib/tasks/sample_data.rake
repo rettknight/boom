@@ -4,6 +4,7 @@ namespace :db do
 	desc "Fill database with sample data"
 	task :populate => :environment do
 	  Rake::Task['db:reset'].invoke
+
        admin= User.create!(:name=> "Ret",
 	  			       	   :email=> "ret@ret.com",
 	  				       :password => "roflcopter",
@@ -25,7 +26,15 @@ namespace :db do
 	  #User.all(:limit => 6).each do |user|
 	  	#50.times do
 	  	#  user.envios.create!(:content => Faker::Lorem.sentence(5))
-	  	#end
+	  	#end 
+	  	#doesnt work idk y? 
 	  #end
+
+	  users=User.all 
+	  user=users.first
+	  following = users[1..50]
+	  followers = users[3..40]
+	  following.each { |followed| user.follow! (followed)}
+	  followers.each { |follower| follower.follow!(user)}
 	end
 end
