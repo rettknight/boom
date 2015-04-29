@@ -64,28 +64,21 @@ class UsersController < ApplicationController
       redirect_to users_path, :flash => {:success => "User deleted."}  
     end
   end
-
-  def user_params
-  	params.require(:user).permit(:name, :email, :password, :password_confirmation, :lastname)
-    #require :user - important, allows it to be created
-  end
-
   private
     def authenticate
       deny_access unless signed_in? 
     end
-
     def correct_user
       @user = User.find(params[:id])
       redirect_to(root_path) unless current_user?(@user)
     end
-
     def set_user
-      @user = User.find(params[:id])  
-     # @envios= @user.envios.paginate(:page => params[:page])
+      @user = User.find(params[:id])
     end
-
     def admin_user
       redirect_to(root_path) unless current_user.admin? 
+    end
+    def user_params
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :lastname)
     end
 end

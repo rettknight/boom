@@ -1,9 +1,31 @@
 <%= form_for(@envio) do |f| %>
 	<%= render 'shared/error_messages', :object => f.object %>
-	<div class="field">
-		<%= f.text_area :status %> 
+	<div class ="field">
+		<%= f.label :status %> <br /> 
+		<%= f.select :status, [['1','1'], ['2','2']] %> 
+	</div>
+	<div class ="field">
+		<%= f.label :reference %> <br /> 
+		<%= f.text_field :reference %> 
+	</div>
+	<div class ="field">
+		<%= f.label :origin %> <br /> 
+		<%= f.text_field :origin %> 
+	</div>
+	<div class ="field">
+		<%= f.label :destiny %> <br /> 
+		<%= f.text_field :destiny %> 
+	</div>
+	<div class ="field">
+		<%= f.label :department %> <br /> 
+		<%= f.text_field :department %> 
+	</div>
+	<div class ="field">
+		<%= f.label :comments %> <br /> 
+		<%= f.text_area :comments %> 
+	</div>
 	</div>
 	<div class="actions">
-		<%=f.submit "Submit" %>
+		<%=f.submit "Enviar" %>
 	</div>
 <% end %>

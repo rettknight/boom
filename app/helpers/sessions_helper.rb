@@ -4,58 +4,42 @@ module SessionsHelper
 		cookies.permanent.signed[:remember_token] = [user.id, user.salt]
 		current_user = user	
 	end
-
 	def current_user=(user)
 		@current_user = user
 	end
-
 	def current_user
 		@current_user ||= user_from_remember_token
-		# ||= if current_user is nil it'll return user_from_remember_token
-		# if it's true it'll return current_user
-		# equivalent to @current_user = @current_user || user_from_remember_token
 	end
-
 	def signed_in?
-		!current_user.nil? #returns true if the user is not (!) nil
+		!current_user.nil?
 	end
-
 	def sign_out
 		cookies.delete(:remember_token)
 		current_user = nil 
 	end
-
 	def current_user?(user)
 	 user == current_user
 	end
-
     def deny_access
     	store_location
     	redirect_to signin_path, :notice => "Please sign in to access this page."
     end
-
     def store_location
-		session[:return_to] = request.fullpath #current site 
+		session[:return_to] = request.fullpath
     end
-
     def redirect_back_or(default)
     	redirect_to(session[:return_to] || default)
     	clear_return_to
     end
-
     def clear_return_to
     	session[:return_to] = nil
     end
-
 	private
 		def user_from_remember_token
 			User.authenticate_with_salt(*remember_token)
-			# It works because salt is madre from id + the password & that's what it validates
-			# the * means user.id, user.salt, it's basically what is inside the hash
 		end
 
 		def remember_token
 			cookies.signed[:remember_token] || [nil, nil]
-			# If it doesn't exist, it returns empty id & salt
 		end
 end
