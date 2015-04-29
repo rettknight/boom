@@ -1,8 +1,5 @@
-
 source 'https://rubygems.org'
 
-
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
 gem 'mysql2'
 gem 'tzinfo-data'
@@ -18,12 +15,14 @@ gem 'gravatar_image_tag'
 gem 'will_paginate'
 
 gem 'sdoc', '~> 0.4.0', group: :doc
+
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
   gem 'annotate'
   gem 'faker'
 end
+
 group :test, :production do
   gem 'pg'
 end

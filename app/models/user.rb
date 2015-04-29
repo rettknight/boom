@@ -17,7 +17,6 @@
 #  avatar             :string(255)
 #  admin              :boolean          default(FALSE)
 #
-
 class User < ActiveRecord::Base
 	attr_accessor :password
 	has_many :envios
