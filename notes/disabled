@@ -1,0 +1,32 @@
+edit.html.erb
+
+<br>
+<br>
+<br>
+<%= form_for(@disableduser) do |f|  %>
+<h2> Disable Account </h2>
+<div class ="field"> 
+	<%= f.label :password %> <br /> 
+	<%= f.password_field :password %> 
+</div>
+<% end %> 
+
+users_controller.rb
+  # def disable
+  #   @disableuser = current_user
+  #   def disabled_params
+  #     params.require(:user).permit(:name, :email, :password, :lastname, :admin, :deletedAt)
+  #   end
+  #    if @disableduser.authenticate(params[:session][:email], params[:disableduser][:password])
+  #       if @disableduser.update_attributes(disabled_params).merge(:deletedAt => "#{Time.now.utc}")
+  #        redirect_to root_path, :flash => {:success => "Account disabled. "}
+  #       else 
+  #        redirect_to :back, :flash => {:error => "Failed. "}
+  #        end
+  #    end
+  # end
+
+
+
+  Disabled pending, how to do it? 
+  
