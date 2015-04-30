@@ -1,11 +1,10 @@
 <tr>
  <td class = "envio">
-
  </span>  
  </td>
- <!-- DRY, Fix later.-->
- 	<% user = envio.user rescue User.find(envio.idUser) %> 
+ 	<% user = envio.user rescue User.find(envio.user_id) %> 
  	<% if current_user?(user) || current_user.admin? %> 
+		<td><%= envio.status %> <%= envio.date %> <%= envio.reference %> <%= envio.comments %> </td> 
 		<td><%= link_to "delete", envio, 	 :method=> :delete,  
 											 :confirm => "You sure?"%>
 		</td>

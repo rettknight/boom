@@ -74,6 +74,7 @@ class UsersController < ApplicationController
     end
     def set_user
       @user = User.find(params[:id])
+      @envios= @user.envios.paginate(:page => params[:page])
     end
     def admin_user
       redirect_to(root_path) unless current_user.admin? 

@@ -2,7 +2,7 @@
 #
 # Table name: users
 #
-#  idUser             :integer          not null, primary key
+#  id                 :integer          not null, primary key
 #  name               :string(100)      not null
 #  lastname           :string(100)
 #  email              :string(100)      not null
@@ -17,6 +17,7 @@
 #  avatar             :string(255)
 #  admin              :boolean          default(FALSE)
 #
+
 class User < ActiveRecord::Base
 	attr_accessor :password
 	has_many :envios
@@ -39,7 +40,7 @@ class User < ActiveRecord::Base
 			(user && user.has_password?(submitted_password)) ? user : nil
 		end
 		def authenticate_with_salt(id, cookie_salt)
-			user = find_by_idUser(id)
+			user = find_by_id(id)
 			(user && user.salt == cookie_salt) ? user : nil 
 		end
 	end
