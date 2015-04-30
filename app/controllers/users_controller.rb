@@ -1,12 +1,17 @@
 class UsersController < ApplicationController
   before_filter :authenticate, except: [:show, :new, :create]
   before_filter :correct_user, only: [:edit, :update]
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_filter :admin_user, only: [:destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :adminpanel]
+  before_filter :admin_user, only: [:destroy, :adminpanel]
   
   def index
     @users = User.paginate(:page => params[:page])
     @title = " - All Users "
+  end
+  
+  def adminpanel
+   @title = "Admin Panel"
+   @newuser = User.new
   end
 
   def show
@@ -29,31 +34,44 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
-    @title = "- Sign up"
+    @title = "Sign up"
   end
 
   def create
-   	@user = User.new(user_params)
-		if @user.save
-      sign_in @user
-			redirect_to user_path(@user), :flash => {:success => "User created."}
-		else
-			@title = "- Sign up "
-			render 'new'
-		end
+    if current_user.admin? 
+      @newuser = User.new(user_params)
+      if @newuser.save
+        flash[:notice] = "User created. "
+        redirect_to adminpanel_user_path(current_user)
+      else
+        flash[:error] = "Failed. "
+        redirect_to adminpanel_user_path(current_user)
+      end
+    else 
+      @user = User.new(user_params)
+      if @user.save 
+      sign_in @user unless current_user.admin? 
+      redirect_to user_path(@user), :flash => {:success => "User created."} unless current_user.admin?
+      else
+      @title = "Sign up"
+      render 'new'
+      end
+    end
    end 
 
   def edit
-    @title = "- Edit user" 
+    @title = "Edit user" 
   end
 
   def update
-    if @user.update_attributes(user_params)
-      redirect_to @user, :flash =>{:success => "User information changed."}
-    else
-      render 'edit'
-      @title = "- Edit user"
-    end
+     if params[:admin]=0 || (params[:admin]=1 && current_user.admin?)
+      if @user.update_attributes(user_params)
+        redirect_to @user, :flash =>{:success => "User information changed."}
+      else
+        render 'edit'
+        @title = "- Edit user"
+      end
+     end
   end
 
   def destroy
@@ -70,7 +88,7 @@ class UsersController < ApplicationController
     end
     def correct_user
       @user = User.find(params[:id])
-      redirect_to(root_path) unless current_user?(@user)
+      redirect_to(root_path) unless current_user?(@user) || current_user.admin? 
     end
     def set_user
       @user = User.find(params[:id])
@@ -78,8 +96,9 @@ class UsersController < ApplicationController
     end
     def admin_user
       redirect_to(root_path) unless current_user.admin? 
+      flash[:notice] = "You have no permission to access this page. " if !current_user.admin?
     end
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation, :lastname)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :lastname, :admin) 
     end
 end

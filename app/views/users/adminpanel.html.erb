@@ -1,0 +1,24 @@
+<%= form_tag(adminpanel_user_path, :method => "get", id: "search-form") do %>
+  	 <%= text_field_tag :search, params[:search], placeholder: "Search Users" %>
+ 	 <%= submit_tag "Search", :name => nil %>
+<% end %>
+<% if params[:search] %> 
+	<% @user = User.find_by_email(params[:search]) %>
+	<% if !@user.nil? %>
+		<%= render @user %> 
+	<% else %>
+		<% flash[:notice] = "User doesn't exist. " %> 
+	<% end %> 
+<% end %> 
+<br>
+<br>
+<br>
+<br>
+<h1>Create a New User </h1> 
+<%= form_for(@newuser) do |f| %>
+	<%= render 'shared/error_messages', :object => f.object %>
+	<%= render 'fields', :f => f %>
+	<div class ="actions">
+		<%= f.submit "Create new user"%>
+	</div>
+<% end %> 

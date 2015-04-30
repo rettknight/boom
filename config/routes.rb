@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   resources :users do 
   	member do
   	 get :following, :followers
-  	end
+  	 get :adminpanel
+    end
   end
 
   resources :sessions, :only => [:new, :create, :destroy]
