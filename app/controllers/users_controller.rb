@@ -42,13 +42,15 @@ class UsersController < ApplicationController
     if current_user.nil?
      @user = User.new(user_params)
       if @user.save 
-        sign_in @user unless current_user.admin? 
+        sign_in @user
         redirect_to user_path(@user), :flash => {:success => "User created."} unless current_user.admin?
       else
         @title = "Sign up"
         render 'new'
       end
-    else 
+    else
+     flash[:notice] = "You are already registered. " if !current_user.admin?  
+     redirect_to root_path unless current_user.admin?
      if current_user.admin?
         @newuser = User.new(user_params)
         if @newuser.save 

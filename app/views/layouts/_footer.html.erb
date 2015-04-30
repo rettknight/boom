@@ -2,6 +2,9 @@
 <nav class="round">	
 <ul>
 <li> <%= link_to "Home", root_path %> </li>
+<% if signed_in? %>
+<li> <%= link_to "Actions", actions_path %> </li> 
+<% end %> 
 </ul>
 </nav>
 </footer>

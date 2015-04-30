@@ -1,0 +1,6 @@
+ add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+
+-- falta para findbyemail mas rapido 
+done? 
+
+Users can't be deleted, just disabled = keep in mind for user.rb => :dependent => :destroy doesn't matter since it won't destroy anything anyway. 
